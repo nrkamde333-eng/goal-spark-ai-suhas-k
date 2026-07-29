@@ -39,10 +39,13 @@ function loadState(): AppState {
   }
 }
 
+const EMPTY_STATE: AppState = {
+  user: { name: "Alex Rivera", email: "alex@goalpilot.ai" },
+  tasks: [], goals: [], habits: [], events: [], messages: [], theme: "dark",
+};
+
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [state, _setState] = useState<AppState>(() =>
-    typeof window === "undefined" ? makeDemoState() : loadState(),
-  );
+  const [state, _setState] = useState<AppState>(EMPTY_STATE);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
