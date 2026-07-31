@@ -1,7 +1,7 @@
 import { createFileRoute, Link, Outlet, useRouterState, useNavigate } from "@tanstack/react-router";
 import {
   LayoutDashboard, Brain, Calendar, ListChecks, Target, LineChart, Settings,
-  Search, Bell, Moon, Sun, Sparkles, Plus, LogOut, User, Menu, X,
+  Search, Bell, Moon, Sun, Sparkles, Plus, LogOut, User, Menu,
 } from "lucide-react";
 import { useApp } from "@/lib/store";
 import { Button } from "@/components/ui/button";
