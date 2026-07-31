@@ -32,12 +32,25 @@ const nav = [
 ];
 
 function AppLayout() {
-  const { state, toggleTheme, addTask, resetDemo } = useApp();
+  const { state, hydrated, toggleTheme, addTask, resetDemo } = useApp();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
   const [quickOpen, setQuickOpen] = useState(false);
   const [quickTitle, setQuickTitle] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  if (!hydrated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
+        <div className="flex flex-col items-center gap-3">
+          <div className="size-10 rounded-xl gradient-brand grid place-items-center shadow-lg shadow-primary/30 animate-pulse">
+            <span className="font-display font-extrabold text-white text-sm">G</span>
+          </div>
+          <div className="text-sm text-muted-foreground">Loading GoalPilot…</div>
+        </div>
+      </div>
+    );
+  }
 
   const isActive = (to: string, end?: boolean) =>
     end ? pathname === to : pathname === to || pathname.startsWith(to + "/");
