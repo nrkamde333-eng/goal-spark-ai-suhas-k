@@ -1,13 +1,14 @@
 import { createFileRoute, Link, Outlet, useRouterState, useNavigate } from "@tanstack/react-router";
 import {
   LayoutDashboard, Brain, Calendar, ListChecks, Target, LineChart, Settings,
-  Search, Bell, Moon, Sun, Sparkles, Plus, LogOut, User,
+  Search, Bell, Moon, Sun, Sparkles, Plus, LogOut, User, Menu, X,
 } from "lucide-react";
 import { useApp } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/app")({
