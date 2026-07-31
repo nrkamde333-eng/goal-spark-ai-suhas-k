@@ -5,7 +5,16 @@ import { Bar, BarChart, CartesianGrid, Cell, Line, LineChart, Pie, PieChart, Res
 import { CheckCircle2, Flame, Target as TargetIcon, TrendingUp } from "lucide-react";
 
 export const Route = createFileRoute("/app/analytics")({
-  head: () => ({ meta: [{ title: "Analytics — GoalPilot" }] }),
+  head: () => ({
+    meta: [
+      { title: "Analytics — GoalPilot" },
+      { name: "description", content: "Visualize productivity, task completion, habit streaks and goal progress." },
+      { property: "og:title", content: "Analytics — GoalPilot" },
+      { property: "og:description", content: "Insights and trends for your goals, tasks and habits." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
   component: AnalyticsPage,
 });
 

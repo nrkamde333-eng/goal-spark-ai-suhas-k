@@ -11,7 +11,16 @@ import { addDays, format } from "date-fns";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/app/habits")({
-  head: () => ({ meta: [{ title: "Habits — GoalPilot" }] }),
+  head: () => ({
+    meta: [
+      { title: "Habits — GoalPilot" },
+      { name: "description", content: "Track daily habits, build streaks and see your consistency over time." },
+      { property: "og:title", content: "Habits — GoalPilot" },
+      { property: "og:description", content: "Build consistency with streaks and a 12-week habit heatmap." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
   component: HabitsPage,
 });
 
