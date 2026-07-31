@@ -69,6 +69,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const ctx: Ctx = {
     state,
+    hydrated,
     setState,
     toggleTask: (id) =>
       setState((s) => ({
@@ -117,19 +118,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     toggleTheme: () =>
       setState((s) => ({ ...s, theme: s.theme === "dark" ? "light" : "dark" })),
   };
-
-  if (!hydrated) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
-        <div className="flex flex-col items-center gap-3">
-          <div className="size-10 rounded-xl gradient-brand grid place-items-center shadow-lg shadow-primary/30 animate-pulse">
-            <span className="font-display font-extrabold text-white text-sm">G</span>
-          </div>
-          <div className="text-sm text-muted-foreground">Loading GoalPilot…</div>
-        </div>
-      </div>
-    );
-  }
 
   return <AppCtx.Provider value={ctx}>{children}</AppCtx.Provider>;
 }
