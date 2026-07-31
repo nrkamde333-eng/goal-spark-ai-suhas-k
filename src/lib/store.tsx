@@ -5,6 +5,7 @@ const KEY = "goalpilot-state-v1";
 
 type Ctx = {
   state: AppState;
+  hydrated: boolean;
   setState: (updater: (s: AppState) => AppState) => void;
   // Actions
   toggleTask: (id: string) => void;
