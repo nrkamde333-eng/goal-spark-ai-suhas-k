@@ -37,9 +37,30 @@ function AppLayout() {
   const navigate = useNavigate();
   const [quickOpen, setQuickOpen] = useState(false);
   const [quickTitle, setQuickTitle] = useState("");
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const isActive = (to: string, end?: boolean) =>
     end ? pathname === to : pathname === to || pathname.startsWith(to + "/");
+
+  const NavItems = ({ onNavigate }: { onNavigate?: () => void }) => (
+    <>
+      {nav.map((n) => (
+        <Link
+          key={n.to}
+          to={n.to}
+          onClick={onNavigate}
+          className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition ${
+            isActive(n.to, n.end)
+              ? "bg-primary/15 text-foreground"
+              : "text-muted-foreground hover:bg-sidebar-accent hover:text-foreground"
+          }`}
+        >
+          <n.icon className="size-4" />
+          {n.label}
+        </Link>
+      ))}
+    </>
+  );
 
   return (
     <div className="min-h-screen flex bg-background">
@@ -52,20 +73,7 @@ function AppLayout() {
           <span className="font-display font-extrabold text-lg tracking-tight">GoalPilot</span>
         </Link>
         <nav className="flex-1 p-3 space-y-1">
-          {nav.map((n) => (
-            <Link
-              key={n.to}
-              to={n.to}
-              className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition ${
-                isActive(n.to, n.end)
-                  ? "bg-primary/15 text-foreground"
-                  : "text-muted-foreground hover:bg-sidebar-accent hover:text-foreground"
-              }`}
-            >
-              <n.icon className="size-4" />
-              {n.label}
-            </Link>
-          ))}
+          <NavItems />
         </nav>
         <div className="p-3 border-t">
           <div className="rounded-xl p-3 glass border">
@@ -105,14 +113,46 @@ function AppLayout() {
 
       {/* Main */}
       <div className="flex-1 min-w-0 flex flex-col">
-        <header className="sticky top-0 z-40 h-16 border-b glass flex items-center justify-between px-4 md:px-6">
-          <div className="flex items-center gap-3 flex-1 max-w-lg">
-            <div className="relative w-full">
+        <header className="sticky top-0 z-40 h-16 border-b glass flex items-center justify-between px-4 md:px-6 gap-3">
+          <div className="flex items-center gap-3 flex-1 min-w-0">
+            <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+              <SheetTrigger asChild>
+                <Button size="icon" variant="ghost" className="md:hidden shrink-0" aria-label="Open menu">
+                  <Menu className="size-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-64 bg-sidebar text-sidebar-foreground p-0 border-r flex flex-col">
+                <SheetTitle className="sr-only">Navigation</SheetTitle>
+                <div className="flex items-center justify-between px-5 h-16 border-b">
+                  <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2.5">
+                    <div className="size-8 rounded-lg gradient-brand grid place-items-center shadow-lg shadow-primary/30">
+                      <Sparkles className="size-4 text-white" />
+                    </div>
+                    <span className="font-display font-extrabold text-lg tracking-tight">GoalPilot</span>
+                  </Link>
+                </div>
+                <nav className="flex-1 p-3 space-y-1">
+                  <NavItems onNavigate={() => setMobileOpen(false)} />
+                </nav>
+                <div className="p-3 border-t">
+                  <div className="flex items-center gap-2">
+                    <div className="size-8 rounded-full gradient-brand grid place-items-center font-bold text-white text-xs">
+                      {state.user?.name.split(" ").map((s) => s[0]).join("")}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-semibold truncate">{state.user?.name}</div>
+                      <div className="text-xs text-muted-foreground truncate">{state.user?.email}</div>
+                    </div>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
+            <div className="relative w-full max-w-lg hidden sm:block">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
               <Input placeholder="Search tasks, habits, goals…" className="pl-9 rounded-full bg-muted/40 border-transparent" />
             </div>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 shrink-0">
             <Dialog open={quickOpen} onOpenChange={setQuickOpen}>
               <DialogTrigger asChild>
                 <Button size="sm" className="rounded-full gradient-brand text-white hidden sm:inline-flex">
