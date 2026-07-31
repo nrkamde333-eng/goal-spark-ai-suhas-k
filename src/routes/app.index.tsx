@@ -9,6 +9,16 @@ import { format, isToday, isTomorrow, parseISO } from "date-fns";
 import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/app/")({
+  head: () => ({
+    meta: [
+      { title: "Dashboard — GoalPilot" },
+      { name: "description", content: "Your daily focus hub: tasks, habits, upcoming events and goal progress." },
+      { property: "og:title", content: "Dashboard — GoalPilot" },
+      { property: "og:description", content: "Track today's tasks, habits and goals in your AI productivity workspace." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
   component: Dashboard,
 });
 

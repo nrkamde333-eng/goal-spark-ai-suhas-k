@@ -5,6 +5,7 @@ const KEY = "goalpilot-state-v1";
 
 type Ctx = {
   state: AppState;
+  hydrated: boolean;
   setState: (updater: (s: AppState) => AppState) => void;
   // Actions
   toggleTask: (id: string) => void;
@@ -68,6 +69,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const ctx: Ctx = {
     state,
+    hydrated,
     setState,
     toggleTask: (id) =>
       setState((s) => ({

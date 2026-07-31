@@ -9,7 +9,16 @@ import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/app/settings")({
-  head: () => ({ meta: [{ title: "Settings — GoalPilot" }] }),
+  head: () => ({
+    meta: [
+      { title: "Settings — GoalPilot" },
+      { name: "description", content: "Manage your profile, theme and workspace preferences." },
+      { property: "og:title", content: "Settings — GoalPilot" },
+      { property: "og:description", content: "Customize your GoalPilot workspace." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
   component: SettingsPage,
 });
 

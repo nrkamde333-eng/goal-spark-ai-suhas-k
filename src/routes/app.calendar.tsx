@@ -12,7 +12,16 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/app/calendar")({
-  head: () => ({ meta: [{ title: "Calendar — GoalPilot" }] }),
+  head: () => ({
+    meta: [
+      { title: "Calendar — GoalPilot" },
+      { name: "description", content: "Plan your month, manage events and align your schedule with your goals." },
+      { property: "og:title", content: "Calendar — GoalPilot" },
+      { property: "og:description", content: "Smart calendar view for goal-driven scheduling." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
   component: CalendarPage,
 });
 

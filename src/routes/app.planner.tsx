@@ -13,7 +13,16 @@ import type { GeneratedPlan } from "@/lib/demo-data";
 import { addDays } from "date-fns";
 
 export const Route = createFileRoute("/app/planner")({
-  head: () => ({ meta: [{ title: "AI Planner — GoalPilot" }] }),
+  head: () => ({
+    meta: [
+      { title: "AI Planner — GoalPilot" },
+      { name: "description", content: "Describe any goal and get an AI-generated roadmap with milestones, tasks and habits." },
+      { property: "og:title", content: "AI Planner — GoalPilot" },
+      { property: "og:description", content: "Generate a personalized goal roadmap and apply it to your workspace." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
   component: Planner,
 });
 

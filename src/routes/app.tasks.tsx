@@ -15,7 +15,16 @@ import { CategoryBadge, PriorityDot } from "./app.index";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/app/tasks")({
-  head: () => ({ meta: [{ title: "Tasks — GoalPilot" }] }),
+  head: () => ({
+    meta: [
+      { title: "Tasks — GoalPilot" },
+      { name: "description", content: "Organize your tasks by today, this week, priority and completion." },
+      { property: "og:title", content: "Tasks — GoalPilot" },
+      { property: "og:description", content: "Focus on the right tasks at the right time." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
   component: TasksPage,
 });
 
