@@ -182,7 +182,9 @@ export function makeDemoState(): AppState {
 function seedLog(days: number, density: number): string[] {
   const out: string[] = [];
   for (let i = 0; i < days; i++) {
-    if (Math.random() < density) out.push(iso(addDays(today, -i)).slice(0, 10));
+    // Deterministic pseudo-random based on day index so SSR and client match.
+    const pseudo = ((i * 9301 + 49297) % 233280) / 233280;
+    if (pseudo < density) out.push(iso(addDays(today, -i)).slice(0, 10));
   }
   return out;
 }
